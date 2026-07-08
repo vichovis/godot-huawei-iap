@@ -24,7 +24,7 @@ class AndroidExportPlugin extends EditorExportPlugin:
 		return PackedStringArray([path])
 
 	func _get_android_dependencies(platform, debug):
-		return PackedStringArray(["com.huawei.hms:iap:6.12.0.302"])
+		return PackedStringArray(["com.huawei.hms:iap:6.16.6.305"])
 
 	func _get_android_dependencies_maven_repos(platform, debug):
 		return PackedStringArray(["https://developer.huawei.com/repo/"])

@@ -62,7 +62,7 @@ if store.is_owned("full_game"):
 ./gradlew assemble
 ```
 
-Output: `plugin/build/outputs/aar/plugin-release.aar`
+Output: `plugin/build/outputs/aar/plugin-debug.aar`
 
 ## License
 
