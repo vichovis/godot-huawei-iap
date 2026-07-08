@@ -6,7 +6,7 @@ class ProductCache {
     private val owned = ConcurrentHashMap<String, Boolean>()
 
     fun markOwned(productId: String) {
-        owned[productId] = true
+        owned.put(productId, true)
     }
 
     fun isOwned(productId: String): Boolean {
@@ -15,7 +15,7 @@ class ProductCache {
 
     fun setOwnedProducts(productIds: Set<String>) {
         owned.clear()
-        productIds.forEach { owned[it] = true }
+        productIds.forEach { owned.put(it, true) }
     }
 
     fun clear() {

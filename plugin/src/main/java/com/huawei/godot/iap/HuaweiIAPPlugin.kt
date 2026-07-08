@@ -10,7 +10,7 @@ import org.godotengine.godot.plugin.UsedByGodot
 class HuaweiIAPPlugin(godot: Godot) : GodotPlugin(godot), HuaweiIAPCallback {
 
     private val productCache = ProductCache()
-    private val iapClient: IAPClient by lazy { IAPClient(getActivity()) }
+    private val iapClient: IAPClient by lazy { IAPClient(getActivity()!!) }
     private val purchaseManager: PurchaseManager by lazy { PurchaseManager(iapClient, productCache, this) }
 
     override fun getPluginName(): String = "HuaweiIAP"
@@ -23,14 +23,14 @@ class HuaweiIAPPlugin(godot: Godot) : GodotPlugin(godot), HuaweiIAPCallback {
         )
     }
 
-    override fun onMainActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
+    override fun onMainActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         purchaseManager.handleActivityResult(requestCode, resultCode, data)
-        return super.onMainActivityResult(requestCode, resultCode, data)
+        super.onMainActivityResult(requestCode, resultCode, data)
     }
 
     @UsedByGodot
     fun initialize() {
-        purchaseManager.initialize(getActivity())
+        purchaseManager.initialize(getActivity()!!)
     }
 
     @UsedByGodot

@@ -13,7 +13,7 @@ import com.huawei.hms.iap.entity.PurchaseIntentResult
 import com.huawei.hms.iap.entity.PurchaseResultInfo
 import com.huawei.hms.iap.entity.ConsumeOwnedPurchaseReq
 import com.huawei.hms.iap.entity.ConsumeOwnedPurchaseResult
-import com.huawei.hms.task.Task
+import com.huawei.hmf.tasks.Task
 
 class IAPClient(context: Context) {
     private val client: IapClient = Iap.getIapClient(context)

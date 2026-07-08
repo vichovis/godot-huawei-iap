@@ -29,7 +29,7 @@ class PurchaseManager(
     }
 
     fun startPurchase(productId: String) {
-        val task = iapClient.createPurchaseIntent(productId, IapClient.PriceType.PRICE_TYPE_NON_CONSUMABLE, "")
+        val task = iapClient.createPurchaseIntent(productId, 0, "")
         task.addOnSuccessListener { result ->
             val status = result.status
             if (status != null && status.hasResolution()) {
@@ -80,7 +80,7 @@ class PurchaseManager(
     }
 
     fun restorePurchases() {
-        val task = iapClient.obtainOwnedPurchases(IapClient.PriceType.PRICE_TYPE_NON_CONSUMABLE)
+        val task = iapClient.obtainOwnedPurchases(0)
         task.addOnSuccessListener { result ->
             val purchasedProductIds = mutableListOf<String>()
             result.inAppPurchaseDataList?.forEach { data ->
