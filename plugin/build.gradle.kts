@@ -43,7 +43,12 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+    maven { url = uri("https://developer.huawei.com/repo/") }
+}
+
 dependencies {
     implementation("org.godotengine:godot:4.7.0.stable")
-    implementation("com.huawei.hms:iap:6.12.0.302")
+    implementation("com.huawei.hms:iap:6.16.6.305")
 }
