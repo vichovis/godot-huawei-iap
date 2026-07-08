@@ -10,8 +10,8 @@ import org.godotengine.godot.plugin.UsedByGodot
 class HuaweiIAPPlugin(godot: Godot) : GodotPlugin(godot), HuaweiIAPCallback {
 
     private val productCache = ProductCache()
-    private val iapClient = IAPClient(godot)
-    private val purchaseManager = PurchaseManager(iapClient, productCache, this)
+    private val iapClient: IAPClient by lazy { IAPClient(getActivity()) }
+    private val purchaseManager: PurchaseManager by lazy { PurchaseManager(iapClient, productCache, this) }
 
     override fun getPluginName(): String = "HuaweiIAP"
 
@@ -30,8 +30,7 @@ class HuaweiIAPPlugin(godot: Godot) : GodotPlugin(godot), HuaweiIAPCallback {
 
     @UsedByGodot
     fun initialize() {
-        val activity = godot.getActivity()
-        purchaseManager.initialize(activity)
+        purchaseManager.initialize(getActivity())
     }
 
     @UsedByGodot

@@ -20,10 +20,8 @@ class AndroidExportPlugin extends EditorExportPlugin:
 		return false
 
 	func _get_android_libraries(platform, debug):
-		if debug:
-			return PackedStringArray(["addons/HuaweiIAP/HuaweiIAP.aar"])
-		else:
-			return PackedStringArray(["addons/HuaweiIAP/HuaweiIAP.aar"])
+		var path = "addons/godot-huawei-iap/HuaweiIAP.aar"
+		return PackedStringArray([path])
 
 	func _get_android_dependencies(platform, debug):
 		return PackedStringArray(["com.huawei.hms:iap:6.12.0.302"])

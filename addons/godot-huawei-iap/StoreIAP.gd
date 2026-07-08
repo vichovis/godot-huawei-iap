@@ -39,6 +39,10 @@ func initialize():
 	elif Engine.has_singleton("InAppStore"):
 		_apple = Engine.get_singleton("InAppStore")
 		_apple.set_auto_finish_transaction(true)
+		_apple.purchase_success.connect(_on_apple_success)
+		_apple.purchase_failed.connect(_on_apple_failed)
+		_apple.restore_purchases_success.connect(_on_apple_restored)
+		_apple.restore_purchases_failed.connect(_on_apple_restore_failed)
 		_backend = Backend.APPLE
 	elif ClassDB.class_exists("BillingClient"):
 		_google = ClassDB.instantiate("BillingClient")
@@ -58,7 +62,7 @@ func purchase(product_id: String):
 		Backend.GOOGLE:
 			_google.purchase({product_id = product_id})
 		Backend.APPLE:
-			_apple.purchase({product_id = product_id})
+			_apple.purchase(product_id)
 
 
 func restore():
@@ -73,6 +77,25 @@ func restore():
 
 func is_owned(product_id: String) -> bool:
 	return _owned_cache.get(product_id, false)
+
+
+func _on_apple_success(product_id: String):
+	_owned_cache[product_id] = true
+	purchase_success.emit(product_id)
+
+
+func _on_apple_failed(product_id: String, error_code: int, error_message: String):
+	purchase_failed.emit(product_id, error_message)
+
+
+func _on_apple_restored(product_ids: PackedStringArray):
+	for pid in product_ids:
+		_owned_cache[pid] = true
+	purchase_restored.emit(product_ids)
+
+
+func _on_apple_restore_failed(error_code: int, error_message: String):
+	purchase_failed.emit("", error_message)
 
 
 func _on_huawei_success(product_id: String):

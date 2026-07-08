@@ -43,7 +43,7 @@ class PurchaseManager(
             }
         }.addOnFailureListener { e ->
             val error = if (e is com.huawei.hms.common.ApiException) {
-                IAPError.fromStatusCode(e.statusCode, e.message ?: "")
+                IAPError.fromStatusCode(e.statusCode, e.message ?: "", productId)
             } else {
                 IAPError.NetworkError(e.message ?: "Unknown error")
             }
