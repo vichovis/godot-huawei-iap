@@ -29,7 +29,7 @@ android {
         val aarTask = tasks.register("${variantName}CopyAAR") {
             doLast {
                 val aarFile = layout.buildDirectory.file("outputs/aar/${project.name}-$variantName.aar")
-                val outputDir = rootProject.layout.projectDirectory.dir("plugin/addons/$pluginName")
+                val outputDir = rootProject.layout.projectDirectory.dir("addons/godot-huawei-iap")
                 copy {
                     from(aarFile)
                     into(outputDir)

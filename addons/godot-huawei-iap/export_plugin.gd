@@ -1,0 +1,33 @@
+@tool
+extends EditorPlugin
+
+var export_plugin: AndroidExportPlugin
+
+func _enter_tree():
+	export_plugin = AndroidExportPlugin.new()
+	add_export_plugin(export_plugin)
+
+func _exit_tree():
+	remove_export_plugin(export_plugin)
+	export_plugin = null
+
+class AndroidExportPlugin extends EditorExportPlugin:
+	var _plugin_name = "HuaweiIAP"
+
+	func _supports_platform(platform):
+		if platform is EditorExportPlatformAndroid:
+			return true
+		return false
+
+	func _get_android_libraries(platform, debug):
+		var path = "addons/godot-huawei-iap/HuaweiIAP.aar"
+		return PackedStringArray([path])
+
+	func _get_android_dependencies(platform, debug):
+		return PackedStringArray(["com.huawei.hms:iap:6.16.6.305"])
+
+	func _get_android_dependencies_maven_repos(platform, debug):
+		return PackedStringArray(["https://developer.huawei.com/repo/"])
+
+	func _get_name():
+		return _plugin_name
