@@ -1,0 +1,16 @@
+name: Integration
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate GDScript
+        uses: croconx/godot-gdscript-tools@v1
+        with:
+          args: gdlint addons/godot-huawei-iap/

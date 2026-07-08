@@ -1,0 +1,10 @@
+; Engine configuration file.
+; It's used by Godot to detect the project and load its resources.
+
+[application]
+config/name="HuaweiIAP Demo"
+config/features=PackedStringArray("4.7")
+config/icon="res://icon.svg"
+
+[rendering]
+renderer/rendering_method="mobile"
