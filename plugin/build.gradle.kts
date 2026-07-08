@@ -44,6 +44,7 @@ android {
 }
 
 repositories {
+    google()
     mavenCentral()
     maven { url = uri("https://developer.huawei.com/repo/") }
 }
